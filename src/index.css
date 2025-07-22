@@ -1,0 +1,190 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium Admin Panel Design System */
+
+@layer base {
+  :root {
+    /* Core System */
+    --background: 225 25% 4%;
+    --foreground: 225 15% 95%;
+
+    --card: 225 25% 6%;
+    --card-foreground: 225 15% 95%;
+
+    --popover: 225 25% 6%;
+    --popover-foreground: 225 15% 95%;
+
+    --primary: 259 94% 51%;
+    --primary-foreground: 225 15% 95%;
+
+    --secondary: 225 20% 12%;
+    --secondary-foreground: 225 15% 85%;
+
+    --muted: 225 20% 10%;
+    --muted-foreground: 225 10% 65%;
+
+    --accent: 259 94% 51%;
+    --accent-foreground: 225 15% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 225 15% 95%;
+
+    --border: 225 20% 15%;
+    --input: 225 20% 12%;
+    --ring: 259 94% 51%;
+
+    --radius: 0.75rem;
+
+    /* Admin Panel Specific */
+    --sidebar-background: 225 25% 5%;
+    --sidebar-foreground: 225 15% 85%;
+    --sidebar-primary: 259 94% 51%;
+    --sidebar-primary-foreground: 225 15% 95%;
+    --sidebar-accent: 225 20% 8%;
+    --sidebar-accent-foreground: 225 15% 95%;
+    --sidebar-border: 225 20% 12%;
+    --sidebar-ring: 259 94% 51%;
+
+    /* Glass Morphism */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 225 25% 5%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 225 25% 5%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 25% 5%;
+
+    --primary: 259 94% 51%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 225 10% 96%;
+    --secondary-foreground: 225 25% 15%;
+
+    --muted: 225 10% 96%;
+    --muted-foreground: 225 10% 45%;
+
+    --accent: 259 94% 51%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 225 20% 85%;
+    --input: 225 20% 90%;
+    --ring: 259 94% 51%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 225 25% 15%;
+    --sidebar-primary: 259 94% 51%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 225 10% 95%;
+    --sidebar-accent-foreground: 225 25% 15%;
+    --sidebar-border: 225 20% 85%;
+    --sidebar-ring: 259 94% 51%;
+
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-medium;
+  }
+
+  /* Glass morphism utility */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    @apply bg-gradient-to-br from-purple-500 via-violet-600 to-blue-600;
+  }
+
+  .gradient-secondary {
+    @apply bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900;
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-muted/20;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
