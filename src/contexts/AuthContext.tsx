@@ -70,7 +70,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         .single();
 
       if (error) throw error;
-      setProfile(data);
+      
+      // Type-safe profile data with role validation
+      const profileData: UserProfile = {
+        id: data.id,
+        email: data.email,
+        full_name: data.full_name,
+        role: (data.role === 'admin' || data.role === 'user') ? data.role : 'user'
+      };
+      
+      setProfile(profileData);
     } catch (error) {
       console.error('Error fetching profile:', error);
       toast({

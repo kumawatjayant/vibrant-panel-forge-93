@@ -22,15 +22,32 @@ import { UserAddPage } from '@/components/admin/UserAddPage';
 import { UserEditPage } from '@/components/admin/UserEditPage';
 import { UserViewPage } from '@/components/admin/UserViewPage';
 import { AddEnquiryForm } from '@/components/admin/AddEnquiryForm';
+import { useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function AdminPage() {
+  const [currentView, setCurrentView] = useState('dashboard');
+  const [theme, setTheme] = useState('light');
+  const { signOut } = useAuth();
+
+  const handleViewChange = (view: string) => {
+    setCurrentView(view);
+  };
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
+
   return (
     <Routes>
       <Route path="/login" element={<LoginForm />} />
       <Route path="/*" element={
         <ProtectedRoute requireAdmin>
           <div className="flex min-h-screen bg-background">
-            <AdminSidebar />
+            <AdminSidebar 
+              currentView={currentView}
+              onViewChange={handleViewChange}
+            />
             <div className="flex-1 flex flex-col">
               <TopNavbar />
               <main className="flex-1 overflow-auto p-6">
@@ -42,8 +59,18 @@ export default function AdminPage() {
                   <Route path="/fees" element={<FeeManagementView />} />
                   <Route path="/attendance" element={<AttendanceView />} />
                   <Route path="/reports" element={<ReportsView />} />
-                  <Route path="/settings" element={<SettingsView />} />
-                  <Route path="/profile" element={<ProfileView />} />
+                  <Route path="/settings" element={
+                    <SettingsView 
+                      theme={theme}
+                      onThemeToggle={toggleTheme}
+                      onBack={() => setCurrentView('dashboard')}
+                    />
+                  } />
+                  <Route path="/profile" element={
+                    <ProfileView 
+                      onBack={() => setCurrentView('dashboard')}
+                    />
+                  } />
                   <Route path="/student/add" element={<StudentAddPage />} />
                   <Route path="/student/edit/:id" element={<StudentEditPage />} />
                   <Route path="/student/view/:id" element={<StudentViewPage />} />
